@@ -1,6 +1,4 @@
-def main():
-    print("Hello from rehdz-genai-bot!")
-
+from src.bot.server import run
 
 if __name__ == "__main__":
-    main()
+    run()
