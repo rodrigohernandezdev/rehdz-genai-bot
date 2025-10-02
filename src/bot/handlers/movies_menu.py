@@ -19,8 +19,8 @@ async def movies_menu(update: Update, context: CallbackContext) -> int:
     return MOVIES_MENU
 
 
-async def movie_categories(update: Update, context: CallbackContext) -> int:
-    """Calls the agent to get movie categories and displays them."""
+async def movie_genres(update: Update, context: CallbackContext) -> int:
+    """Calls the agent to get movie genres and displays them."""
     query = update.callback_query
     await query.answer()
 
@@ -33,7 +33,7 @@ async def movie_categories(update: Update, context: CallbackContext) -> int:
         agent_response = response.get("output", "No se han encontrado categorías.")
     except Exception as e:
         agent_response = f"No se han encontrado categorías"
-        print(f"Error in movie_categories: {e}")
+        print(f"Error in movie_genres: {e}")
 
     await query.edit_message_text(text=agent_response, reply_markup=None, parse_mode=ParseMode.MARKDOWN)
 
