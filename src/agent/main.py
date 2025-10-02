@@ -8,7 +8,7 @@ from src.config import GEMINI_KEY
 
 llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite", google_api_key=GEMINI_KEY)
 
-tools = themoviedb_tools, date_tools
+tools = themoviedb_tools + date_tools
 
 prompt = hub.pull("hwchase17/react")
 

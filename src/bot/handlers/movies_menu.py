@@ -28,7 +28,12 @@ async def movie_genres(update: Update, context: CallbackContext) -> int:
 
     try:
         response = await agent_executor.ainvoke({
-            "input": "¿Cuales categorías de películas hay registradas? Formatea la respuesta como una lista de viñetas de markdown (usando '-')."
+            "input": """
+            ¿Cuales categorías de películas hay registradas? 
+            Formatea la respuesta como una lista de viñetas de markdown (usando '-').
+            Agrega emojis relacionados con los géneros de películas.
+            Responde solo con la lista de categorías y nada más.
+            """
         })
         agent_response = response.get("output", "No se han encontrado categorías.")
     except Exception as e:
