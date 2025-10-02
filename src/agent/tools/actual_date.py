@@ -4,7 +4,7 @@ from langchain_core.tools import tool
 
 
 @tool
-async def get_actual_date() -> str:
+def get_actual_date() -> str:
     """
     Get the actual date from the system.
     Returns:

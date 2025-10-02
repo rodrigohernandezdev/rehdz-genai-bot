@@ -19,3 +19,5 @@ agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
 if __name__ == '__main__':
     result = agent_executor.invoke({"input": "What are the movie genres?"})
     print(result)
+    result_date = agent_executor.invoke({"input": "what is the actual date?"})
+    print(result_date)
