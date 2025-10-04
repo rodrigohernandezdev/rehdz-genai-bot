@@ -61,24 +61,25 @@ def search_movie(query: str) -> str:
         results = data.get("results", [])
 
         if not results:
-            return f"No se encontraron películas con el título '{query}'."
+            return f"There is not result for: '{query}'."
 
         movie_list = []
-        for movie in results[:5]:  # Limit to top 5 results
+        for movie in results[:5]:
             title = movie.get("title", "N/A")
             release_date = movie.get("release_date", "N/A")
             overview = movie.get("overview", "Sin descripción disponible")
             rating = movie.get("vote_average", "N/A")
 
-            movie_info = f"**{title}** ({release_date})\n"
+            movie_info = f"*{title}* ({release_date})\n"
             movie_info += f"⭐ Calificación: {rating}/10\n"
             movie_info += f" Sinapsis {overview}\n"
             movie_list.append(movie_info)
 
-        return "Resultados de búsqueda:\n\n" + "\n---\n\n".join(movie_list)
+        return "Search result:\n\n" + "\n---\n\n".join(movie_list)
 
     except requests.exceptions.RequestException as e:
-        return f"An error occurred while searching for movies: {e}"
+        print(f"Error during movie search: {e}")
+        return f"An error occurred while searching for movies"
 
 
 themoviedb_tools = [get_movie_genres, search_movie]

@@ -1,5 +1,5 @@
 from telegram import Update
-from telegram.constants import ParseMode
+from telegram.constants import ParseMode, ChatAction
 from telegram.ext import CallbackContext, ConversationHandler
 
 from src.agent.main import agent_executor
@@ -54,7 +54,10 @@ async def search_movie_handler(update: Update, context: CallbackContext) -> int:
 
     movie_query = " ".join(context.args)
 
-    await context.bot.send_chat_action(chat_id=update.effective_chat.id, action="typing")
+    await context.bot.send_chat_action(
+        chat_id=update.effective_chat.id,
+        action=ChatAction.TYPING,
+    )
 
     try:
         response = await agent_executor.ainvoke({
@@ -71,6 +74,8 @@ async def search_movie_handler(update: Update, context: CallbackContext) -> int:
             """
         })
         agent_response = response.get("output", f"No se encontró información sobre '{movie_query}'.")
+        if agent_response == "":
+            agent_response = f"No se encontró información sobre '{movie_query}'."
     except Exception as e:
         agent_response = f"Ocurrió un error al buscar la película."
         print(f"Error in search_movie_handler: {e}")
