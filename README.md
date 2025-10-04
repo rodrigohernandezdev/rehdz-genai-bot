@@ -51,7 +51,7 @@ An AI-powered Telegram bot that provides entertainment services including movie 
 
 2. Install dependencies:
    ```bash
-   pip install python-telegram-bot dotenv langchain langchain-community langchain-google-genai requests
+   pip install -r requirements.txt
    ```
 
 3. Run the bot:

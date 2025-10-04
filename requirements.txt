@@ -1,0 +1,6 @@
+dotenv>=0.9.9
+langchain>=0.3.27
+langchain-community>=0.3.30
+langchain-google-genai>=2.1.12
+python-telegram-bot>=22.5
+requests>=2.32.5
