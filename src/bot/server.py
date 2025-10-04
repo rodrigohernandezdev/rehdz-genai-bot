@@ -14,7 +14,6 @@ from src.bot.handlers.conversation import handle_conversation
 from src.bot.handlers.date_menu import get_actual_date
 from src.bot.handlers.main_menu import start, main_menu
 from src.bot.handlers.movies_menu import movies_menu, movie_genres, search_movie_handler
-from src.bot.handlers.music_menu import music_menu
 from src.bot.handlers.weather_menu import get_weather
 
 
@@ -28,18 +27,13 @@ def run():
             config.MAIN_MENU: [
                 CallbackQueryHandler(movies_menu, pattern="^movies$"),
                 CallbackQueryHandler(get_actual_date, pattern="^date$"),
-                CallbackQueryHandler(music_menu, pattern="^music$"),
                 CallbackQueryHandler(cancel, pattern="^cancel$"),
             ],
             config.MOVIES_MENU: [
                 CallbackQueryHandler(movie_genres, pattern="^genres$"),
                 CallbackQueryHandler(main_menu, pattern="^main$"),
                 CallbackQueryHandler(cancel, pattern="^cancel$"),
-            ],
-            config.MUSIC_MENU: [
-                CallbackQueryHandler(main_menu, pattern="^main$"),
-                CallbackQueryHandler(cancel, pattern="^cancel$"),
-            ],
+            ]
         },
         fallbacks=[
             CommandHandler("start", start),

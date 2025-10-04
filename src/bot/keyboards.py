@@ -5,7 +5,6 @@ def get_main_menu_keyboard() -> InlineKeyboardMarkup:
     keyboard = [
         [InlineKeyboardButton("🎬 Películas", callback_data="movies")],
         [InlineKeyboardButton("📅 Fecha actual", callback_data="date")],
-        [InlineKeyboardButton("🎵 Música", callback_data="music")],
         [InlineKeyboardButton("❌ Cancelar", callback_data="cancel")]
     ]
     return InlineKeyboardMarkup(keyboard)
