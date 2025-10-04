@@ -8,10 +8,11 @@ from telegram.ext import (
 
 import src.config as config
 from src.bot.handlers.common import cancel
-from src.bot.handlers.date_menu import actual_date
+from src.bot.handlers.date_menu import get_actual_date
 from src.bot.handlers.main_menu import start, main_menu
 from src.bot.handlers.movies_menu import movies_menu, movie_genres
 from src.bot.handlers.music_menu import music_menu
+from src.bot.handlers.weather_menu import get_weather
 
 
 def run():
@@ -23,7 +24,7 @@ def run():
         states={
             config.MAIN_MENU: [
                 CallbackQueryHandler(movies_menu, pattern="^movies$"),
-                CallbackQueryHandler(actual_date, pattern="^date$"),
+                CallbackQueryHandler(get_actual_date, pattern="^date$"),
                 CallbackQueryHandler(music_menu, pattern="^music$"),
                 CallbackQueryHandler(cancel, pattern="^cancel$"),
             ],
@@ -44,6 +45,7 @@ def run():
     )
 
     application.add_handler(conv_handler)
-    application.add_handler(CommandHandler("date", actual_date))
+    application.add_handler(CommandHandler("fecha", get_actual_date))
+    application.add_handler(CommandHandler("clima", get_weather))
 
     application.run_polling(allowed_updates=Update.ALL_TYPES)

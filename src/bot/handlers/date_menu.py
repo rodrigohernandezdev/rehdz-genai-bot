@@ -7,7 +7,7 @@ from telegram.ext import ConversationHandler, CallbackContext
 from src.agent.main import llm
 
 
-async def actual_date(update: Update, context: CallbackContext) -> int:
+async def get_actual_date(update: Update, context: CallbackContext) -> int:
     """Returns the actual date."""
 
     await context.bot.send_chat_action(
