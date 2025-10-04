@@ -29,7 +29,7 @@ async def movie_genres(update: Update, context: CallbackContext) -> int:
     try:
         response = await agent_executor.ainvoke({
             "input": """
-            ¿Cuales categorías de películas hay registradas? 
+            ¿Cuales categorías de películas hay registradas?
             Formatea la respuesta como una lista de viñetas de markdown (usando '-').
             Agrega emojis relacionados con los géneros de películas.
             Responde solo con la lista de categorías y nada más.
@@ -41,5 +41,40 @@ async def movie_genres(update: Update, context: CallbackContext) -> int:
         print(f"Error in movie_genres: {e}")
 
     await query.edit_message_text(text=agent_response, reply_markup=None, parse_mode=ParseMode.MARKDOWN)
+
+    return ConversationHandler.END
+
+
+async def search_movie_handler(update: Update, context: CallbackContext) -> int:
+    """Handles the command to search for movies."""
+    if not context.args:
+        await update.message.reply_text(
+            "Por favor proporciona el nombre de una película.\nEjemplo: /pelicula El Padrino")
+        return ConversationHandler.END
+
+    movie_query = " ".join(context.args)
+
+    await context.bot.send_chat_action(chat_id=update.effective_chat.id, action="typing")
+
+    try:
+        response = await agent_executor.ainvoke({
+            "input": f"""Busca información sobre la película '{movie_query}'.
+            Formatea la respuesta en markdown de esta manera:
+            - Usa **negrita** para el título y año
+            - Agrega emojis relevantes (⭐ para calificación, 🎬 para película, etc)
+            - Separa las secciones claramente
+            - Si hay múltiples resultados, muestra maximo 2 resultados y solo las que tengan Sinapsis
+            - Incluye: Título, Año, Calificación, Resumen
+            - Muestra las mas valoradas o recientes primero
+            - Mantén la información concisa y bien estructurada
+            Responde solo con la información de la película y nada más.
+            """
+        })
+        agent_response = response.get("output", f"No se encontró información sobre '{movie_query}'.")
+    except Exception as e:
+        agent_response = f"Ocurrió un error al buscar la película."
+        print(f"Error in search_movie_handler: {e}")
+
+    await update.message.reply_text(text=agent_response, parse_mode=ParseMode.MARKDOWN)
 
     return ConversationHandler.END

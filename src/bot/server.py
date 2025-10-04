@@ -10,7 +10,7 @@ import src.config as config
 from src.bot.handlers.common import cancel
 from src.bot.handlers.date_menu import get_actual_date
 from src.bot.handlers.main_menu import start, main_menu
-from src.bot.handlers.movies_menu import movies_menu, movie_genres
+from src.bot.handlers.movies_menu import movies_menu, movie_genres, search_movie_handler
 from src.bot.handlers.music_menu import music_menu
 from src.bot.handlers.weather_menu import get_weather
 
@@ -47,5 +47,6 @@ def run():
     application.add_handler(conv_handler)
     application.add_handler(CommandHandler("fecha", get_actual_date))
     application.add_handler(CommandHandler("clima", get_weather))
+    application.add_handler(CommandHandler("pelicula", search_movie_handler))
 
     application.run_polling(allowed_updates=Update.ALL_TYPES)
