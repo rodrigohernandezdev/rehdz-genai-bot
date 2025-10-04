@@ -25,6 +25,8 @@ An AI-powered Telegram bot that provides entertainment services including movie 
    - `MOVIEDB_KEY`: TheMovieDB API key
    - `WEATHER_KEY`: Weather API key
 
+3. The project includes a `uv.lock` file for dependency management, ensuring consistent builds across environments.
+
 ### Running Locally
 
 #### Using UV (Recommended)

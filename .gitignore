@@ -14,8 +14,8 @@ venv/
 *.env
 *.venv
 
-# uv-specific files
-uv.lock
+# uv-specific files (lock file should be committed for reproducible builds)
+# uv.lock
 
 # Editor/IDE specific files
 .vscode/
